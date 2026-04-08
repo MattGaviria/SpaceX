@@ -37,13 +37,15 @@ npm run build
 
 ## Screenshots
 
-Add your screenshots below before submission:
-
 ### 1. All Missions Page
+<img width="1692" height="918" alt="ss1" src="https://github.com/user-attachments/assets/6b632745-2907-4e4b-b1a0-1ab38723b626" />
 
 
 ### 2. Filter by Year Page
 
+<img width="1726" height="891" alt="ss2" src="https://github.com/user-attachments/assets/95ce748d-f634-4cd8-baf0-bd52b3fa1f87" />
 
 ### 3. Mission Details Page
+<img width="1600" height="958" alt="ss3" src="https://github.com/user-attachments/assets/a0b50171-66d3-432d-984b-41bf5e9f21a7" />
+
 
