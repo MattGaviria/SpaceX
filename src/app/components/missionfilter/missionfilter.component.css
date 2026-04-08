@@ -19,6 +19,15 @@ h1 {
   gap: 20px;
 }
 
+.loading-indicator {
+  padding: 10px 16px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  background-color: #eceff1;
+  color: #455a64;
+  font-weight: 600;
+}
+
 .error-message {
   background-color: #ffebee;
   color: #c62828;
@@ -51,6 +60,26 @@ h1 {
   font-size: 1.1em;
   margin-bottom: 15px;
   color: #333;
+}
+
+.year-search {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.year-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cfd8dc;
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.year-input:focus {
+  outline: none;
+  border-color: #1976d2;
 }
 
 .year-filter {

@@ -2,7 +2,7 @@
   <h1>SpaceX Missions by Launch Year</h1>
 
   <div *ngIf="isLoading" class="loading">
-    <mat-spinner></mat-spinner>
+    <div class="loading-indicator">Loading...</div>
     <p>Loading launch years...</p>
   </div>
 
@@ -14,6 +14,21 @@
     <!-- Year Filter Sidebar -->
     <div class="filter-sidebar">
       <h2>Launch Date</h2>
+
+      <div class="year-search">
+        <input
+          #yearInput
+          type="number"
+          [value]="searchYear"
+          (keyup.enter)="searchByYear(yearInput.value)"
+          placeholder="Enter launch year"
+          class="year-input"
+        />
+        <button mat-raised-button color="primary" (click)="searchByYear(yearInput.value)">
+          Search
+        </button>
+      </div>
+
       <div class="year-filter">
         <button 
           mat-stroked-button
