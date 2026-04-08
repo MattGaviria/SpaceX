@@ -13,22 +13,37 @@ Features:
 
 Install dependencies:
 
+```bash
 npm install
+```
 
 Start development server:
 
+```bash
 ng serve
+```
 
 Open:
 
-http://localhost:4200
+`http://localhost:4200`
 
-If port 4200 is busy:
-
-ng serve --port 4201
 
 ## Build
 
+```bash
 npm run build
+```
 
+
+## Screenshots
+
+Add your screenshots below before submission:
+
+### 1. All Missions Page
+
+
+### 2. Filter by Year Page
+
+
+### 3. Mission Details Page
 
