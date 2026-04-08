@@ -1,59 +1,34 @@
-# 101521980LabTest2Comp3133
+# 101521980 Lab Test 2 COMP3133
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+SpaceX Mission Explorer built with Angular.
 
-## Development server
+Features:
+- View all SpaceX missions
+- Filter missions by launch year
+- View mission details
+- Render mission patch image when available
+- Show placeholder when image is not available
 
-To start a local development server, run:
+## Run Locally
 
-```bash
+Install dependencies:
+
+npm install
+
+Start development server:
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open:
 
-## Code scaffolding
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+If port 4200 is busy:
 
-```bash
-ng generate component component-name
-```
+ng serve --port 4201
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Build
 
-```bash
-ng generate --help
-```
+npm run build
 
-## Building
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
