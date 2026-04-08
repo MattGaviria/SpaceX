@@ -1,0 +1,144 @@
+<div class="details-container">
+  <button 
+    mat-raised-button 
+    color="accent"
+    (click)="goBack()"
+    class="back-button"
+  >
+    ← Back to Missions
+  </button>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+    <p>Loading mission details...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error && mission" class="mission-details">
+    <!-- Main Details Card -->
+    <mat-card class="details-card">
+      <mat-card-header>
+        <div class="header-content">
+          <img
+            *ngIf="mission.links.mission_patch_small || mission.links.mission_patch || mission.mission_patch_small; else detailsPatchPlaceholder"
+            [src]="mission.links.mission_patch_small || mission.links.mission_patch || mission.mission_patch_small"
+            alt="Mission patch"
+            class="large-patch"
+          />
+          <ng-template #detailsPatchPlaceholder>
+            <div class="large-patch large-patch-placeholder">No Patch Available</div>
+          </ng-template>
+          <div class="header-info">
+            <h1>{{ mission.mission_name }}</h1>
+            <p class="mission-id">Flight Number: {{ mission.flight_number }}</p>
+            <p class="launch-year">Launch Year: {{ mission.launch_year }}</p>
+            <p class="status" [class.success]="mission.success" [class.failure]="!mission.success">
+              Status: {{ mission.success ? '✓ Successful' : '✗ Failed' }}
+            </p>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Rocket Information -->
+        <section class="info-section">
+          <h2>Rocket Information</h2>
+          <mat-divider></mat-divider>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="label">Rocket Name:</span>
+              <span class="value">{{ mission.rocket.rocket_name }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Rocket Type:</span>
+              <span class="value">{{ mission.rocket.rocket_type }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Launch Site Information -->
+        <section class="info-section" *ngIf="mission.launch_site">
+          <h2>Launch Site</h2>
+          <mat-divider></mat-divider>
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="label">Site Name:</span>
+              <span class="value">{{ mission.launch_site.site_name_long }}</span>
+            </div>
+            <div class="info-item">
+              <span class="label">Site ID:</span>
+              <span class="value">{{ mission.launch_site.site_id }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Launch Details -->
+        <section class="info-section">
+          <h2>Launch Details</h2>
+          <mat-divider></mat-divider>
+          <div class="details-text">
+            <p *ngIf="mission.details">
+              {{ mission.details }}
+            </p>
+            <p *ngIf="!mission.details" class="no-details">
+              No additional details available for this mission.
+            </p>
+          </div>
+        </section>
+
+        <!-- More Info / Links -->
+        <section class="info-section" *ngIf="mission.links">
+          <h2>More Info on Launch Details</h2>
+          <mat-divider></mat-divider>
+          <div class="links-container">
+            <button 
+              *ngIf="mission.links.article_link"
+              mat-raised-button
+              (click)="openLink(mission.links.article_link)"
+              class="link-button"
+            >
+              <mat-icon>article</mat-icon>
+              Read Article
+            </button>
+            <button 
+              *ngIf="mission.links.wikipedia"
+              mat-raised-button
+              color="primary"
+              (click)="openLink(mission.links.wikipedia)"
+              class="link-button"
+            >
+              <mat-icon>language</mat-icon>
+              Wikipedia
+            </button>
+            <button 
+              *ngIf="mission.links.video_link"
+              mat-raised-button
+              color="accent"
+              (click)="openLink(mission.links.video_link)"
+              class="link-button"
+            >
+              <mat-icon>play_circle</mat-icon>
+              Watch Video
+            </button>
+          </div>
+        </section>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button 
+          mat-raised-button
+          (click)="goBack()"
+        >
+          Back to Missions
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading && !error && !mission" class="no-mission">
+    <p>Mission not found.</p>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="mission-list-container">
+  <h1>SpaceX Mission Launch List</h1>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+    <p>Loading missions...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error && missions.length > 0" class="missions-grid">
+    <mat-card *ngFor="let mission of missions" class="mission-card">
+      <mat-card-header>
+        <div class="mission-header">
+          <img
+            *ngIf="mission.links.mission_patch_small || mission.mission_patch_small; else missionPatchPlaceholder"
+            [src]="mission.links.mission_patch_small || mission.mission_patch_small"
+            alt="Mission patch"
+            class="mission-patch"
+          />
+          <ng-template #missionPatchPlaceholder>
+            <div class="mission-patch mission-patch-placeholder">No Patch</div>
+          </ng-template>
+          <div class="mission-info">
+            <h2>{{ mission.mission_name }}</h2>
+            <p class="mission-year">{{ mission.launch_year }}</p>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="mission-detail">
+          <strong>Flight #:</strong> {{ mission.flight_number }}
+        </p>
+        <p class="mission-detail" *ngIf="mission.details">
+          <strong>Details:</strong> {{ mission.details }}
+        </p>
+        <p class="mission-detail">
+          <strong>Rocket:</strong> {{ mission.rocket.rocket_name }} ({{ mission.rocket.rocket_type }})
+        </p>
+        <mat-divider></mat-divider>
+        <div class="links-section" *ngIf="mission.links">
+          <p *ngIf="mission.links.article_link">
+            <a [href]="mission.links.article_link" target="_blank">Article Link</a>
+          </p>
+          <p *ngIf="mission.links.wikipedia">
+            <a [href]="mission.links.wikipedia" target="_blank">Wikipedia</a>
+          </p>
+          <p *ngIf="mission.links.video_link">
+            <a [href]="mission.links.video_link" target="_blank">Watch Video</a>
+          </p>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="viewDetails(mission)"
+        >
+          View Details
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading && missions.length === 0" class="no-missions">
+    <p>No missions found.</p>
+  </div>
+</div>

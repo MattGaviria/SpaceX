@@ -1,0 +1,100 @@
+<div class="filter-container">
+  <h1>SpaceX Missions by Launch Year</h1>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+    <p>Loading launch years...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="filter-layout">
+    <!-- Year Filter Sidebar -->
+    <div class="filter-sidebar">
+      <h2>Launch Date</h2>
+      <div class="year-filter">
+        <button 
+          mat-stroked-button
+          [color]="selectedYear === null ? 'primary' : ''"
+          (click)="clearFilter()"
+          class="year-button"
+        >
+          All Years
+        </button>
+        <button 
+          *ngFor="let year of years"
+          mat-stroked-button
+          [color]="selectedYear === year ? 'primary' : ''"
+          (click)="filterByYear(year)"
+          class="year-button"
+        >
+          {{ year }}
+          <span class="year-count"> ({{ getCountByYear(year) }})</span>
+        </button>
+      </div>
+      
+      <div class="filter-actions">
+        <button mat-raised-button color="primary" (click)="clearFilter()">
+          Clear Filter
+        </button>
+      </div>
+    </div>
+
+    <!-- Missions Grid -->
+    <div class="missions-content">
+      <h2 *ngIf="selectedYear" class="filter-title">
+        Missions from {{ selectedYear }}
+      </h2>
+      <h2 *ngIf="!selectedYear" class="filter-title">
+        All Missions ({{ missions.length }} total)
+      </h2>
+
+      <div class="missions-grid">
+        <mat-card *ngFor="let mission of missions" class="mission-card">
+          <mat-card-header>
+            <img
+              *ngIf="mission.links.mission_patch_small || mission.mission_patch_small; else filterMissionPatchPlaceholder"
+              [src]="mission.links.mission_patch_small || mission.mission_patch_small"
+              alt="Mission patch"
+              class="mission-patch"
+            />
+            <ng-template #filterMissionPatchPlaceholder>
+              <div class="mission-patch mission-patch-placeholder">No Patch</div>
+            </ng-template>
+            <div class="mission-header-info">
+              <h3>{{ mission.mission_name }}</h3>
+              <p class="mission-number">Flight #{{ mission.flight_number }}</p>
+            </div>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p><strong>Launch Year:</strong> {{ mission.launch_year }}</p>
+            <p><strong>Rocket:</strong> {{ mission.rocket.rocket_name }}</p>
+            <p>
+              <strong>Status:</strong> 
+              <span [class.success]="mission.success" [class.failure]="!mission.success">
+                {{ mission.success ? 'Successful' : 'Failed' }}
+              </span>
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button 
+              mat-raised-button 
+              color="primary"
+              (click)="viewDetails(mission)"
+            >
+              View Details
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <div *ngIf="missions.length === 0" class="no-missions">
+        <p>No missions found for the selected year.</p>
+      </div>
+    </div>
+  </div>
+</div>
